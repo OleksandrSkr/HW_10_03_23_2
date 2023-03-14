@@ -1,33 +1,10 @@
-# 1) Context menu : a) All products b) Buy product c) Registration d) Auth e) Balance q) Quit
-#  product - manufacturer , label , price , date
-
-# Dict -> object
-# {
-#    "key" : "value"
-# }
-
-# a)  All products - print all products into the console
-# []
-
-# b) cart -> history of user shopping
-
-# user = { "login" , "password" , "money" , "money_transfer"}
-# c)  - register / auth
-# q)  - quit
-# buy car
-# money_transfer
-
-# e) Balance
-
-# b)  Buy product -> if money enough -> buy car -> - money
-
-from datetime import date
+print("Grocery store 'ATB'")
 
 def is_exit():
     result = input("Do you wanna quit ? y/n : ")
     return result.lower()
 
-def registration (login , password , balance = 0):
+def registration (login , password , balance):
     return {
         "login" : login,
         "password" : password,
@@ -37,18 +14,13 @@ def registration (login , password , balance = 0):
 def show_products (list_of_products):
     for product in list_of_products:
         print("\n")
-        print("***********************" + product['label'] + "***********************\n")
+        for key , value in product.items():
+            print(key + "       " + value)
 
-        for key , value in product.items() :
-            if key == "date":
-                print(key + " ====> " + str(value))
-                continue
-
-            print(key + " ====> " + value)
-
-def auth (login,array_of_users) :
+def auth (login , array_of_users) :
     for user in array_of_users :
         if login in user['login'] :
+#            print("hi user")
 
             password = input("Enter your account's password : ")
 
@@ -62,7 +34,7 @@ def auth (login,array_of_users) :
             print("Incorrect login")
 
 def get_balance (account) :
-    print("[USER_BALANCE]", account['balance'], "Y.E.")
+    print("[USER_BALANCE]", account['balance'], "UAN")
 
 def money_transfer (account) :
     card_number = input("Enter your card number : ")
@@ -82,111 +54,128 @@ def money_transfer (account) :
     account['balance'] = int(account['balance']) + int(money)
     print(f"Congratulations now your balance is : {str(account['balance'])} y.e")
 
-def buy_car (target , list_of_products) :
+def buy_food (target , list_of_products) :
     for product in list_of_products:
         if target.lower() == product['label'].lower():
-            sliced_price = product['price'].find("y")
-            print(sliced_price)
-            if int(current_user['balance']) > int(product['price'][:sliced_price - 1]):
-                current_user['balance'] = current_user['balance'] - int(product['price'][:sliced_price - 1])
+            sliced_price = product['price'].find("U")
+            if float(current_user['balance']) > float(product['price'][:sliced_price - 1]):
+                current_user['balance'] = float(current_user['balance']) - float(product['price'][:sliced_price - 1])
+                current_user_food.append(prefer_food)
             else:
                 print("You don't have enough money, top up your balance")
 
-    print(f"After you bought the car there is left {str(current_user['balance'])} on your balance")
+    print(f"You have left {str(current_user['balance'])} on your balance")
 
 products = [
     {
-        "manufacturer" : "Czech Republic",
-        "label" : "Skoda",
-        "price" : "30000 y.e",
-        "date" : date(2023,11,1),
-        "category" : "sedan"
+        "label" : "coca_cola", 
+        "price" : "50 UAH"
     },
     {
-        "manufacturer": "Italy",
-        "label": "Fiat",
-        "price": "20000 y.e",
-        "date": date(2021, 6, 1),
-        "category" : "sedan"
+        "label" : "fanta", 
+        "price" : "45 UAH"
     },
     {
-        "manufacturer": "Germany",
-        "label": "BMW",
-        "price": "10000 y.e",
-        "date": date(2002, 8, 1),
-        "category" : "crossover"
+        "label" : "sprit", 
+        "price" : "40 UAH"
     },
     {
-        "manufacturer": "Germany",
-        "label": "MB",
-        "price": "20000 y.e",
-        "date": date(2012, 12, 2),
-        "category" : "sedan"
+        "label" : "bread", 
+        "price" : "30 UAH"
     },
     {
-        "manufacturer": "Germany",
-        "label": "VW",
-        "price": "10000 y.e",
-        "date": date(2011, 12, 2),
-        "category" : "truck"
+        "label" : "potato", 
+        "price" : "10 UAH"
     },
     {
-        "manufacturer": "Italy",
-        "label": "Alfa Romeo",
-        "price": "10000 y.e",
-        "date": date(2021, 6, 12),
-        "category" : "crossover"
+        "label" : "carrot", 
+        "price" : "25 UAH"
     },
-]
+    {
+        "label" : "cabbage", 
+        "price" : "35 UAH"
+    },
+    {
+        "label" : "beet", 
+        "price" : "35 UAN"
+    },
+    {
+        "label" : "cabbage", 
+        "price" : "35 UAH"
+    },
+    {
+        "label" : "bananas", 
+        "price" : "39 UAH"
+    },
+    {
+        "label" : "apples", 
+        "price" : "17.50 UAH"
+    }
+    ] 
+
+user_name = input("Hi, what's your name : ")
+print(user_name + " choose what you want?")
 
 is_running = True
 
 is_registred = False
 
 users = [
-    {
-        "login" : "admin",
-        "password" : "admin",
-        "balance" : "1200"
-    }
+#    {
+#        "login" : "admin",
+#        "password" : "admin",
+#        "balance" : "1200"
+#    }
 ]
 
 current_user = {}
 
+current_user_food = []
+
+
 while is_running :
     user_choose = input("""
-        a) Show products 
-        b) Buy product 
-        c) Register
-        d) Auth
-        e) Balance
-        q) Quit
+        a) I want to get acquainted with the assortment of the store 
+        b) I want to shop in your store 
+        c) I want to register
+        d) I want to autorisation
+        e) I want to know how much money I have
+        q) I want to leave your store
         
-    Answer : """).lower()
+    I want : """).lower()
 
     if user_choose == "a" :
         show_products(products)
 
     elif user_choose == "b":
+        if not is_registred :
+            print("Only registered customers can make purchases in the store! Please register or autorisation ")
+            continue
+
         show_products(products)
 
-        prefer_car = input("Choose car that you want buy")
+        prefer_food = input("Choose car that you want buy : ")
 
-        buy_car(prefer_car ,products)
+        buy_food(prefer_food ,products)
+
+#        current_user_food.append(prefer_food)
+        print(current_user_food)
 
     elif user_choose == "c":
         login = input("Enter login that you want to use continuously : ")
         password = input("Enter your password : ")
+        balance = input("How much money do you want to send? : ")
 
-        user = registration(login ,password)
+        user = registration(login ,password, balance)
 
         users.append(user)
         print(users)
 
     elif user_choose == "d":
+     
         login = input("Enter your account's login : ")
 
-        result = auth(login  ,users)
+        result = auth(login  , users)
         current_user , is_registred = result
         print(current_user)
         print(is_registred)
@@ -194,7 +183,7 @@ while is_running :
     elif user_choose == "e":
 
         if not is_registred :
-            print("Error!")
+            print(user_name + ", please register!")
             continue
 
         user_choose = input("""
