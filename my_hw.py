@@ -86,6 +86,7 @@ def buy_car (target , list_of_products) :
     for product in list_of_products:
         if target.lower() == product['label'].lower():
             sliced_price = product['price'].find("y")
+            print(sliced_price)
             if int(current_user['balance']) > int(product['price'][:sliced_price - 1]):
                 current_user['balance'] = current_user['balance'] - int(product['price'][:sliced_price - 1])
             else:

@@ -1,27 +1,4 @@
-# 1) Context menu : a) All products b) Buy product c) Registration d) Auth e) Balance q) Quit
-#  product - manufacturer , label , price , date
-
-# Dict -> object
-# {
-#    "key" : "value"
-# }
-
-# a)  All products - print all products into the console
-# []
-
-# b) cart -> history of user shopping
-
-# user = { "login" , "password" , "money" , "money_transfer"}
-# c)  - register / auth
-# q)  - quit
-# buy car
-# money_transfer
-
-# e) Balance
-
-# b)  Buy product -> if money enough -> buy car -> - money
-
-from datetime import date
+print("Grocery store 'ATB'")
 
 def is_exit():
     result = input("Do you wanna quit ? y/n : ")
@@ -37,14 +14,8 @@ def registration (login , password , balance = 0):
 def show_products (list_of_products):
     for product in list_of_products:
         print("\n")
-        print("***********************" + product['label'] + "***********************\n")
-
-        for key , value in product.items() :
-            if key == "date":
-                print(key + " ====> " + str(value))
-                continue
-
-            print(key + " ====> " + value)
+        for key , value in product.items():
+            print(key + "       " + value)
 
 def auth (login,array_of_users) :
     for user in array_of_users :
@@ -82,12 +53,13 @@ def money_transfer (account) :
     account['balance'] = int(account['balance']) + int(money)
     print(f"Congratulations now your balance is : {str(account['balance'])} y.e")
 
-def buy_car (target , list_of_products) :
+def buy_food (target , list_of_products) :
     for product in list_of_products:
         if target.lower() == product['label'].lower():
-            sliced_price = product['price'].find("y")
-            if int(current_user['balance']) > int(product['price'][:sliced_price - 1]):
-                current_user['balance'] = current_user['balance'] - int(product['price'][:sliced_price - 1])
+            sliced_price = product['price'].find("U")
+            #print(sliced_price)
+            if float(current_user['balance']) > float(product['price'][:sliced_price - 1]):
+                current_user['balance'] = float(current_user['balance']) - float(product['price'][:sliced_price - 1])
             else:
                 print("You don't have enough money, top up your balance")
 
@@ -95,48 +67,53 @@ def buy_car (target , list_of_products) :
 
 products = [
     {
-        "manufacturer" : "Czech Republic",
-        "label" : "Skoda",
-        "price" : "30000 y.e",
-        "date" : date(2023,11,1),
-        "category" : "sedan"
+        "label" : "coca_cola", 
+        "price" : "50 UAH"
     },
     {
-        "manufacturer": "Italy",
-        "label": "Fiat",
-        "price": "20000 y.e",
-        "date": date(2021, 6, 1),
-        "category" : "sedan"
+        "label" : "fanta", 
+        "price" : "45 UAH"
     },
     {
-        "manufacturer": "Germany",
-        "label": "BMW",
-        "price": "10000 y.e",
-        "date": date(2002, 8, 1),
-        "category" : "crossover"
+        "label" : "sprit", 
+        "price" : "40 UAH"
     },
     {
-        "manufacturer": "Germany",
-        "label": "MB",
-        "price": "20000 y.e",
-        "date": date(2012, 12, 2),
-        "category" : "sedan"
+        "label" : "bread", 
+        "price" : "30 UAH"
     },
     {
-        "manufacturer": "Germany",
-        "label": "VW",
-        "price": "10000 y.e",
-        "date": date(2011, 12, 2),
-        "category" : "truck"
+        "label" : "potato", 
+        "price" : "10 UAH"
     },
     {
-        "manufacturer": "Italy",
-        "label": "Alfa Romeo",
-        "price": "10000 y.e",
-        "date": date(2021, 6, 12),
-        "category" : "crossover"
+        "label" : "carrot", 
+        "price" : "25 UAH"
     },
-]
+    {
+        "label" : "cabbage", 
+        "price" : "35 UAH"
+    },
+    {
+        "label" : "beet", 
+        "price" : "35 UAN"
+    },
+    {
+        "label" : "cabbage", 
+        "price" : "35 UAH"
+    },
+    {
+        "label" : "bananas", 
+        "price" : "39 UAH"
+    },
+    {
+        "label" : "apples", 
+        "price" : "17.50 UAH"
+    }
+    ] 
+
+user_name = input("Hi, what's your name : ")
+print(user_name + " choose what you want?")
 
 is_running = True
 
@@ -151,6 +128,8 @@ users = [
 ]
 
 current_user = {}
+
+current_user_food = {}
 
 while is_running :
     user_choose = input("""
@@ -167,11 +146,15 @@ while is_running :
         show_products(products)
 
     elif user_choose == "b":
+        if not is_registred :
+            print("Only registered customers can make purchases in the store!")
+            continue
+
         show_products(products)
 
-        prefer_car = input("Choose car that you want buy")
+        prefer_food = input("Choose car that you want buy")
 
-        buy_car(prefer_car ,products)
+        buy_food(prefer_food ,products)
 
     elif user_choose == "c":
         login = input("Enter login that you want to use continuously : ")
