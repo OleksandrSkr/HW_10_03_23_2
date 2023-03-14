@@ -114,14 +114,11 @@ is_running = True
 
 is_registred = False
 
-users = [
-
-]
+users = []
 
 current_user = {}
 
 current_user_food = []
-
 
 while is_running :
     user_choose = input("""
