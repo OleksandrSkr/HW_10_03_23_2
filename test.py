@@ -121,11 +121,11 @@ is_running = True
 is_registred = False
 
 users = [
-#    {
-#        "login" : "admin",
-#        "password" : "admin",
-#        "balance" : "1200"
-#    }
+    {
+        "login" : "admin",
+        "password" : "admin",
+        "balance" : "100"
+    }
 ]
 
 current_user = {}
@@ -172,9 +172,8 @@ while is_running :
         print(users)
 
     elif user_choose == "d":
-     
+    
         login = input("Enter your account's login : ")
-
         result = auth(login  , users)
         current_user , is_registred = result
         print(current_user)
