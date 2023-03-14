@@ -129,7 +129,7 @@ users = [
 
 current_user = {}
 
-current_user_food = {}
+current_user_food = []
 
 while is_running :
     user_choose = input("""
@@ -155,6 +155,9 @@ while is_running :
         prefer_food = input("Choose car that you want buy")
 
         buy_food(prefer_food ,products)
+
+        current_user_food.append(prefer_food)
+        print(current_user_food)
 
     elif user_choose == "c":
         login = input("Enter login that you want to use continuously : ")
